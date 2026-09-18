@@ -5,7 +5,7 @@
 #include <ranges>
 
 void help() {
-    std::cout << "coin flip\nrng --c / rng -c [number] [number]\nRuns a coin flip, by default it is 50-50 but you can add the probability ratio\n\ndice roll\nrng --d [number] [number]\nRuns a dice roll, you need to specify the number of faces the die has, you can also specify the amount of dice to roll\n";
+    std::cout << "(coin flip)\nrng --c / rng -c [number] [number]\nRuns a coin flip, by default it is 50-50 but you can add the probability ratio\n(dice roll)\nrng --d [number] [number]\nRuns a dice roll, you can specify the number of faces the die has, you can also specify the amount of dice to roll.\nIf the face number is left blank it will default to 6, if dice count is blank it will default to 1\n";
 }
 
 std::string coin(int argc, char* argv[], std::mt19937 gen) {
@@ -81,6 +81,10 @@ int main(int argc, char* argv[]) {
             default:
                 break;
         }
+    }
+
+    if (argc < 2) {
+        help();
     }
 
     std::cout << "\n";
