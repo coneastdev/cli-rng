@@ -8,7 +8,7 @@ void help() {
     std::cout << "coin flip\nrng --c / rng -c [number] [number]\nRuns a coin flip, by default it is 50-50 but you can add the probability ratio\n\ndice roll\nrng --d [number] [number]\nRuns a dice roll, you need to specify the number of faces the die has, you can also specify the amount of dice to roll\n";
 }
 
-void coin(int argc, char* argv[], std::mt19937 gen) {
+std::string coin(int argc, char* argv[], std::mt19937 gen) {
     double probability;
     if (argc == 2) {
         probability = 0.5;
@@ -16,7 +16,6 @@ void coin(int argc, char* argv[], std::mt19937 gen) {
         double a = std::stoi(argv[2]);
         double b = std::stoi(argv[3]);
         double probabilityOfHeads = (a / (a + b));
-        std::cout << probabilityOfHeads;
         probability = probabilityOfHeads;
     }
     
@@ -25,17 +24,25 @@ void coin(int argc, char* argv[], std::mt19937 gen) {
     bool result = coin(gen);
 
     if (result) {
-        std::cout << ("Flipping coin... Its Heads!\n");
+        return "Heads";
     } else {
-        std::cout << ("Flipping coin... Its Tails!\n");
+        return "Tails";
     }
 }
 
-void dice(int argc, char* argv[], std::mt19937 gen) {
+std::string dice(int argc, char* argv[], std::mt19937 gen) {
     std::string result = "";
-    std::uniform_int_distribution<int> dice(1, std::stoi(argv[2]));
+    int faces = 6;
+
+    if (argc > 2) {
+        faces = std::stoi(argv[2]);
+    }
+
+    std::uniform_int_distribution<int> dice(1, faces);
 
     int nums = 1;
+
+    
 
     if (argc > 3) {
         nums = std::stoi(argv[3]);
@@ -45,7 +52,7 @@ void dice(int argc, char* argv[], std::mt19937 gen) {
         result += (std::to_string(dice(gen)) + " ");
     }
 
-    std::cout << result << "\n";
+    return result;
 }
 
 int main(int argc, char* argv[]) {
@@ -66,15 +73,17 @@ int main(int argc, char* argv[]) {
                 help();
                 break;
             case 'c':
-                coin(argc, argv, gen);
+                std::cout << coin(argc, argv, gen);
                 break;
             case 'd':
-                dice(argc, argv, gen);
+                std::cout << dice(argc, argv, gen);
                 break;
             default:
                 break;
         }
     }
+
+    std::cout << "\n";
 
     return 0;
 }
