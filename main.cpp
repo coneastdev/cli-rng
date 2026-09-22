@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
 
     // print program details if no arguments are given
     if (argc < 2) {
-        std::cout << "cli-rng\nv.1.2.1\nhttps://github.com/coneastdev/cli-rng\nGPL-3.0\nno warranty is given for this software\n\nuse \"--h\" or \"--help\" for help\n";
+        std::cout << "cli-rng\nv.1.3.4\nhttps://github.com/coneastdev/cli-rng\nGPL-3.0\nno warranty is given for this software\n\nuse \"--h\" or \"--help\" for help\n";
     }
 
     return 0;
